@@ -2,7 +2,7 @@
 [![PyPI supported Python versions](https://img.shields.io/badge/Python%203.10.10-8A2BE2)](https://www.python.org/downloads/release/python-31010/)
 
 <div align="center">
-  <img src="https://dgen.network/wp-content/uploads/2023/03/base1.png"  />
+  <img src="https://ctf-images-01.coinbasecdn.net/c5bd0wqjc7v0/5kbm9b5W1gYOdCZpkb8nAV/3bb74d01953bef05f4cf258adc5ee887/Base_Blog_header.png"  />
   <h1>BASE NFT SOFT</h1>
   <p>Софт для минта NFT от BASE - можно заминтить две бесплатные NFT и прогреть свои аккаунты в данной сети - в будущем в софт будут добавляться другие функции помимо минта NFT</p>
 </div>
