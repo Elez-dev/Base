@@ -19,6 +19,10 @@ TIME_DELAY = [100, 200]  # Задержка после ТРАНЗАКЦИЙ     
 TIME_ACCOUNT_DELAY = [200, 300]  # Задержка между АККАУНТАМИ     [min, max]
 TIME_DELAY_ERROR = [10, 20]  # Задержка при ошибках / фейлах [min, max]
 
+# 1 - Mint Penny
+
+QUANTITY_TRANS = [1, 2]  # [min, max]
+
 # 2 - Mint COIN Earnings
 
 QUANTITY = [1, 2]  # [min, max] Максимум можно только 2 на один акк
