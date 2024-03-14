@@ -1,10 +1,10 @@
-from web3 import Web3
-from loguru import logger
+import random
 from sys import stdout
-from settings import *
-from modules.func import shuffle, get_accounts_data, sleeping
-from modules.mint_nft import MintNFT
+from modules import *
+from modules.custom_route import CustomRouter
+from settings import ROUTES, TIME_ACCOUNT_DELAY, ROUTES_SHUFFLE
 import time
+import json
 
 logger.remove()
 logger.add("./data/log.txt")
@@ -17,20 +17,33 @@ class Worker:
         self.action = action
 
     @staticmethod
-    def chek_gas_eth():
-        while True:
-            try:
-                res = int(round(Web3.from_wei(web3_eth.eth.gas_price, 'gwei')))
-                logger.info(f'Газ сейчас - {res} gwei\n')
-                if res <= MAX_GAS_ETH:
-                    break
+    def generate_route():
+        dick = {}
+        for number, key in keys_list:
+
+            address = web3_eth.eth.account.from_key(key).address
+            new_routes = []
+
+            if ROUTES_SHUFFLE is True:
+                random.shuffle(ROUTES)
+
+            for subarray in ROUTES:
+                if isinstance(subarray, list):
+                    new_routes.append(random.choice(subarray))
+                elif isinstance(subarray, str):
+                    new_routes.append(subarray)
                 else:
-                    time.sleep(60)
-                    continue
-            except Exception as error:
-                logger.error(error)
-                time.sleep(30)
-                continue
+                    new_routes.append(None)
+
+            dick[address] = {
+                'index': 0,
+                'route': new_routes
+            }
+
+        with open('./data/router.json', 'w') as f:
+            json.dump(dick, f)
+
+        logger.success('Successfully generated route\n')
 
     def work(self):
         i = 0
@@ -39,7 +52,6 @@ class Worker:
             i += 1
             address = web3_eth.eth.account.from_key(key).address
             logger.info(f'Account #{i} || {address}\n')
-            self.chek_gas_eth()
 
             if self.action == 1:
                 nft = MintNFT(key, Base, str_number)
@@ -48,6 +60,20 @@ class Worker:
             if self.action == 2:
                 nft = MintNFT(key, Base, str_number)
                 nft.mint_coin_earnings()
+
+            if self.action == 3:
+                nft = MintNFT(key, Base, str_number)
+                nft.mint_frames_of_the_future()
+
+            if self.action == 4:
+                nft = MintFun(key, Base, str_number)
+                nft.mint()
+
+            if self.action == 6:
+                router = CustomRouter(key, str_number, {})
+                res = router.run()
+                if res is False:
+                    continue
 
             logger.success(f'Account completed, sleep and move on to the next one\n')
             sleeping(TIME_ACCOUNT_DELAY[0], TIME_ACCOUNT_DELAY[1])
@@ -64,12 +90,21 @@ if __name__ == '__main__':
             logger.info('''
 1 - Mint Penny
 2 - Mint COIN Earnings
+3 - Mint Frames of the Future
+4 - EIP-4844 is Based
+
+5 - Generate custom routes
+6 - Rus custom routes
 ''')
 
             time.sleep(0.1)
             act = int(input('Choose an action: '))
 
-            if act in range(1, 3):
+            if act == 5:
+                Worker.generate_route()
+                continue
+
+            if act in range(1, 7):
                 break
 
         worker = Worker(act)

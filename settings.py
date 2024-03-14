@@ -11,10 +11,10 @@ CHAIN_RPC = {
     Base    : 'https://rpc.ankr.com/base',
 }
 
-MAX_GAS_ETH = 40        # gas в gwei (смотреть здесь : https://etherscan.io/gastracker)
-BASE_GASPRICE = 0.001   # Использовать Max base fee и Priority fee для газа в Base
+MAX_GAS_ETH = 400        # gas в gwei (смотреть здесь : https://etherscan.io/gastracker)
+BASE_GASPRICE = 0.05   # Использовать Max base fee и Priority fee для газа в Base
 
-RETRY = 5  # Количество попыток при ошибках / фейлах
+RETRY = 1  # Количество попыток при ошибках / фейлах
 TIME_DELAY = [100, 200]  # Задержка после ТРАНЗАКЦИЙ     [min, max]
 TIME_ACCOUNT_DELAY = [200, 300]  # Задержка между АККАУНТАМИ     [min, max]
 TIME_DELAY_ERROR = [10, 20]  # Задержка при ошибках / фейлах [min, max]
@@ -22,3 +22,28 @@ TIME_DELAY_ERROR = [10, 20]  # Задержка при ошибках / фейл
 # 2 - Mint COIN Earnings
 
 QUANTITY = [1, 2]  # [min, max] Максимум можно только 2 на один акк
+
+# 3 - Custom routes
+
+ROUTES = [
+    ['mint_penny'],
+    ['mint_coin_earnings'],
+    ['mint_frames_of_the_fut'],
+    ['mint_eip4844']
+]
+'''
+    Список доступных модулей
+        'mint_penny'
+        'mint_coin_earnings'
+        'mint_frames_of_the_fut'
+        'mint_eip4844'
+           
+    Disclaimer - You can add modules to [] to select random ones,
+    example [module_1, module_2, [module_3, module_4], module 5]
+    The script will start with module 1, 2, 5 and select a random one from module 3 and 4
+
+    You can also specify None in [], and if None is selected by random, this module will be skipped
+'''
+
+ROUTES_SHUFFLE = True           # Перемешка модулей
+TIME_DELAY_ROUTES = [100, 200]  # Задержка между МОДУЛЯМИ     [min, max]
