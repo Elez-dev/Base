@@ -3,7 +3,7 @@ from modules.wallet import Wallet
 from loguru import logger
 from modules.retry import exception_handler
 from web3 import Web3
-from settings import QUANTITY, QUANTITY_TRANS
+from settings import QUANTITY
 import json as js
 
 
@@ -16,23 +16,18 @@ class MintNFT(Wallet):
 
     @exception_handler('Mint Penny')
     def mint_penny(self):
-        quantity = random.randint(QUANTITY_TRANS[0], QUANTITY_TRANS[1])
-        if quantity == 0:
-            return
-        logger.info(f'Mint {quantity} Penny NFT\n')
-        for i in range(quantity):
-            logger.info(f'NFT #{i+1}')
-            tx = {
-                'chainId': self.web3.eth.chain_id,
-                'data': '0x1249c58b',
-                'from': self.address_wallet,
-                'to': Web3.to_checksum_address('0xb3da098a7251a647892203e0c256b4398d131a54'),
-                'nonce': self.web3.eth.get_transaction_count(self.address_wallet),
-                'gas': 150_000,
-                **self.get_gas_price()
-            }
+        logger.info(f'Mint Penny NFT\n')
+        tx = {
+            'chainId': self.web3.eth.chain_id,
+            'data': '0x1249c58b',
+            'from': self.address_wallet,
+            'to': Web3.to_checksum_address('0xb3da098a7251a647892203e0c256b4398d131a54'),
+            'nonce': self.web3.eth.get_transaction_count(self.address_wallet),
+            'gas': 150_000,
+            **self.get_gas_price()
+        }
 
-            self.send_transaction_and_wait(tx, 'Mint Penny')
+        self.send_transaction_and_wait(tx, 'Mint Penny')
 
     @exception_handler('Mint COIN Earnings nft')
     def mint_coin_earnings(self):
@@ -56,3 +51,18 @@ class MintNFT(Wallet):
         ).build_transaction(dick)
 
         self.send_transaction_and_wait(tx, f'Mint {quantity} COIN Earnings nft')
+
+    @exception_handler('Mint Frames of the Future')
+    def mint_frames_of_the_future(self):
+        logger.info('Mint Frames of the Future nft')
+        dick = {
+            'chainId': self.web3.eth.chain_id,
+            'data': '0x1249c58bfc000023c0',
+            'to': Web3.to_checksum_address('0xbf47540eb3c1404dbcf61ca47dfa2d4c8e78c533'),
+            'from': self.address_wallet,
+            'nonce': self.web3.eth.get_transaction_count(self.address_wallet),
+            'gas': 100_000,
+            **self.get_gas_price()
+        }
+
+        self.send_transaction_and_wait(dick, f'Mint Frames of the Future nft')
