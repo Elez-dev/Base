@@ -88,13 +88,13 @@ if __name__ == '__main__':
     while True:
         while True:
             logger.info('''
-1 - Mint Penny
-2 - Mint COIN Earnings
-3 - Mint Frames of the Future
-4 - EIP-4844 is Based
+1 - Mint Penny NFT (1 на акк)
+2 - Mint COIN Earnings NFT(максимум 2 на аккаунт)
+3 - Mint Frames of the Future (1 за транзакцию)
+4 - EIP-4844 is Based (1 за транзакцию)
 
-5 - Generate custom routes
-6 - Rus custom routes
+5 - Generate Сustom routes (сначала запускаем этот модуль, потом модуль 6)
+6 - Rus Сustom routes
 ''')
 
             time.sleep(0.1)
