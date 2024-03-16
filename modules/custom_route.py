@@ -39,6 +39,8 @@ class CustomRouter:
         route = data[address]['route']
         index = data[address]['index']
 
+        flag = False
+
         while index < len(route):
             method_name = route[index]
             if method_name is None:
@@ -50,6 +52,7 @@ class CustomRouter:
                     method = getattr(self, method_name)
                     try:
                         method()
+                        flag = True
                         logger.success(f'Module completed, sleep and move on to the next one\n')
                         sleeping(TIME_DELAY_ROUTES[0], TIME_DELAY_ROUTES[1])
                     except Exception as error:
@@ -61,4 +64,4 @@ class CustomRouter:
                         with open('./data/router.json', 'w') as f:
                             json.dump(data, f)
         else:
-            return False
+            return flag
