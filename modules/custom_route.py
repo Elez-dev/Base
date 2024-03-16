@@ -29,6 +29,10 @@ class CustomRouter:
         nft = MintFun(self.private_key, Base, self.number)
         nft.mint()
 
+    def mint_boxs(self):
+        nft = MintNFT(self.private_key, Base, self.number)
+        nft.mint_box()
+
     def run(self):
         address = web3_eth.eth.account.from_key(self.private_key).address
         data = json.load(open('./data/router.json'))

@@ -69,7 +69,11 @@ class Worker:
                 nft = MintFun(key, Base, str_number)
                 nft.mint()
 
-            if self.action == 6:
+            if self.action == 5:
+                nft = MintNFT(key, Base, str_number)
+                nft.mint_box()
+
+            if self.action == 7:
                 router = CustomRouter(key, str_number, {})
                 res = router.run()
                 if res is False:
@@ -88,23 +92,24 @@ if __name__ == '__main__':
     while True:
         while True:
             logger.info('''
-1 - Mint Penny NFT (1 на акк)
-2 - Mint COIN Earnings NFT(максимум 2 на аккаунт)
-3 - Mint Frames of the Future (1 за транзакцию)
-4 - EIP-4844 is Based (1 за транзакцию)
+1 - Mint Penny
+2 - Mint COIN Earnings
+3 - Mint Frames of the Future
+4 - EIP-4844 is Based
+5 - Mint Box
 
-5 - Generate Сustom routes (сначала запускаем этот модуль, потом модуль 6)
-6 - Rus Сustom routes
+6 - Generate custom routes
+7 - Rus custom routes
 ''')
 
             time.sleep(0.1)
             act = int(input('Choose an action: '))
 
-            if act == 5:
+            if act == 6:
                 Worker.generate_route()
                 continue
 
-            if act in range(1, 7):
+            if act in range(1, 8):
                 break
 
         worker = Worker(act)

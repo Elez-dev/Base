@@ -66,3 +66,21 @@ class MintNFT(Wallet):
         }
 
         self.send_transaction_and_wait(dick, f'Mint Frames of the Future nft')
+
+    @exception_handler('Mint Box')
+    def mint_box(self):
+        logger.info('Mint Box')
+        rand = random.randint(0, 1)
+        data = '0xa0712d68000000000000000000000000000000000000000000000000000000000000000' + str(rand)
+
+        dick = {
+            'chainId': self.web3.eth.chain_id,
+            'data': data,
+            'to': Web3.to_checksum_address('0x3f433f14e6ace35bd11c6a8c6d8875daa68c6a80'),
+            'from': self.address_wallet,
+            'nonce': self.web3.eth.get_transaction_count(self.address_wallet),
+            'gas': 100_000,
+            **self.get_gas_price()
+        }
+
+        self.send_transaction_and_wait(dick, f'Mint Box')

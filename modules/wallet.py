@@ -6,7 +6,7 @@ from requests.adapters import Retry
 from modules.retry import exception_handler
 import requests
 from loguru import logger
-from settings import BASE_GASPRICE, CHAIN_RPC
+from settings import CHAIN_RPC
 from modules.tg_bot import TgBot
 
 SCAN = {
@@ -94,10 +94,7 @@ class Wallet(TgBot):
                 self.web3.middleware_onion.inject(geth_poa_middleware, layer=0)
             except: pass
 
-        elif self.chain == 'Base':
-            gas_price = Web3.to_wei(BASE_GASPRICE, 'gwei')
-            return {'maxFeePerGas': gas_price, 'maxPriorityFeePerGas': int(gas_price * 0.1)}
-        return {'maxFeePerGas': self.web3.eth.gas_price, 'maxPriorityFeePerGas': self.web3.eth.max_priority_fee}
+        return {'maxFeePerGas': self.web3.eth.gas_price, 'maxPriorityFeePerGas': int(self.web3.eth.gas_price * 0.1)}
 
     @staticmethod
     def get_api_call_data_post(url, json):

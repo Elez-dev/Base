@@ -12,9 +12,8 @@ CHAIN_RPC = {
 }
 
 MAX_GAS_ETH = 400        # gas в gwei (смотреть здесь : https://etherscan.io/gastracker)
-BASE_GASPRICE = 0.05   # Использовать Max base fee и Priority fee для газа в Base
 
-RETRY = 1  # Количество попыток при ошибках / фейлах
+RETRY = 2  # Количество попыток при ошибках / фейлах
 TIME_DELAY = [100, 200]  # Задержка после ТРАНЗАКЦИЙ     [min, max]
 TIME_ACCOUNT_DELAY = [200, 300]  # Задержка между АККАУНТАМИ     [min, max]
 TIME_DELAY_ERROR = [10, 20]  # Задержка при ошибках / фейлах [min, max]
