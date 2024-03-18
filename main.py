@@ -2,14 +2,14 @@ import random
 from sys import stdout
 from modules import *
 from modules.custom_route import CustomRouter
-from settings import ROUTES, TIME_ACCOUNT_DELAY, ROUTES_SHUFFLE
+from settings import ROUTES, TIME_ACCOUNT_DELAY, ROUTES_SHUFFLE, CHAIN_RPC
 import time
 import json
 
 logger.remove()
 logger.add("./data/log.txt")
 logger.add(stdout, format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <7}</level> | <cyan>{message}</cyan>")
-web3_eth = Web3(Web3.HTTPProvider('https://rpc.ankr.com/eth', request_kwargs={'timeout': 60}))
+web3_eth = Web3(Web3.HTTPProvider(CHAIN_RPC['Ethereum'], request_kwargs={'timeout': 1}))
 
 
 class Worker:

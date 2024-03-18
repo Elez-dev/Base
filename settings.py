@@ -8,6 +8,7 @@ TG_TOKEN = ''  # API токен тг-бота - создать его можно
 TG_ID = 0  # id твоего телеграмма можно узнать тут       - https://t.me/getmyid_bot
 
 CHAIN_RPC = {
+    Ethereum: 'https://rpc.ankr.com/eth',
     Base    : 'https://rpc.ankr.com/base',
 }
 
@@ -25,10 +26,11 @@ QUANTITY = [1, 2]  # [min, max] Максимум можно только 2 на 
 # 3 - Custom routes
 
 ROUTES = [
-    ['mint_penny'],
-    ['mint_coin_earnings'],
+    ['mint_penny', None],
+    ['mint_coin_earnings', None],
     ['mint_frames_of_the_fut'],
-    ['mint_eip4844']
+    ['mint_eip4844'],
+    ['mint_boxs']
 ]
 '''
     Список доступных модулей
@@ -36,12 +38,7 @@ ROUTES = [
         'mint_coin_earnings'
         'mint_frames_of_the_fut'
         'mint_eip4844'
-           
-    Disclaimer - You can add modules to [] to select random ones,
-    example [module_1, module_2, [module_3, module_4], module 5]
-    The script will start with module 1, 2, 5 and select a random one from module 3 and 4
-
-    You can also specify None in [], and if None is selected by random, this module will be skipped
+        'mint_boxs'
 '''
 
 ROUTES_SHUFFLE = True           # Перемешка модулей

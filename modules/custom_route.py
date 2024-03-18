@@ -36,8 +36,11 @@ class CustomRouter:
     def run(self):
         address = web3_eth.eth.account.from_key(self.private_key).address
         data = json.load(open('./data/router.json'))
-        route = data[address]['route']
-        index = data[address]['index']
+        try:
+            route = data[address]['route']
+            index = data[address]['index']
+        except:
+            return False
 
         flag = False
 

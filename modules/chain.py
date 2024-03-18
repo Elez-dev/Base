@@ -1,1 +1,2 @@
+Ethereum = 'Ethereum'
 Base = 'Base'

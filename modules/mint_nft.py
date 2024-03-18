@@ -27,6 +27,9 @@ class MintNFT(Wallet):
             **self.get_gas_price()
         }
 
+        gas = self.web3.eth.estimate_gas(tx)
+        tx.update({'gas': gas})
+
         self.send_transaction_and_wait(tx, 'Mint Penny')
 
     @exception_handler('Mint COIN Earnings nft')
@@ -55,7 +58,7 @@ class MintNFT(Wallet):
     @exception_handler('Mint Frames of the Future')
     def mint_frames_of_the_future(self):
         logger.info('Mint Frames of the Future nft')
-        dick = {
+        tx = {
             'chainId': self.web3.eth.chain_id,
             'data': '0x1249c58bfc000023c0',
             'to': Web3.to_checksum_address('0xbf47540eb3c1404dbcf61ca47dfa2d4c8e78c533'),
@@ -64,8 +67,10 @@ class MintNFT(Wallet):
             'gas': 100_000,
             **self.get_gas_price()
         }
+        gas = self.web3.eth.estimate_gas(tx)
+        tx.update({'gas': gas})
 
-        self.send_transaction_and_wait(dick, f'Mint Frames of the Future nft')
+        self.send_transaction_and_wait(tx, f'Mint Frames of the Future nft')
 
     @exception_handler('Mint Box')
     def mint_box(self):
@@ -73,7 +78,7 @@ class MintNFT(Wallet):
         rand = random.randint(0, 1)
         data = '0xa0712d68000000000000000000000000000000000000000000000000000000000000000' + str(rand)
 
-        dick = {
+        tx = {
             'chainId': self.web3.eth.chain_id,
             'data': data,
             'to': Web3.to_checksum_address('0x3f433f14e6ace35bd11c6a8c6d8875daa68c6a80'),
@@ -83,4 +88,7 @@ class MintNFT(Wallet):
             **self.get_gas_price()
         }
 
-        self.send_transaction_and_wait(dick, f'Mint Box')
+        gas = self.web3.eth.estimate_gas(tx)
+        tx.update({'gas': gas})
+
+        self.send_transaction_and_wait(tx, f'Mint Box')
