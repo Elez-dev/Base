@@ -3,18 +3,35 @@ from loguru import logger
 from settings import RETRY, TIME_DELAY_ERROR
 from modules.func import sleeping
 from web3 import Web3
-from settings import MAX_GAS_ETH
+from settings import MAX_GAS_ETH, CHAIN_RPC, MAX_GAS_BASE
 import time
 
-web3_eth = Web3(Web3.HTTPProvider('https://rpc.ankr.com/eth', request_kwargs={'timeout': 60}))
+web3_eth = Web3(Web3.HTTPProvider(CHAIN_RPC['Ethereum'], request_kwargs={'timeout': 60}))
+web3_base = Web3(Web3.HTTPProvider(CHAIN_RPC['Base'], request_kwargs={'timeout': 60}))
 
 
-def chek_gas_eth():
+def check_gas_eth():
     while True:
         try:
             res = int(Web3.from_wei(web3_eth.eth.gas_price, 'gwei'))
-            logger.info(f'Газ сейчас - {res} gwei\n')
+            logger.info(f'GAS ETH - {res} gwei')
             if res <= MAX_GAS_ETH:
+                break
+            else:
+                time.sleep(60)
+                continue
+        except Exception as error:
+            logger.error(error)
+            time.sleep(30)
+            continue
+
+
+def check_gas_base():
+    while True:
+        try:
+            res = float(Web3.from_wei(web3_base.eth.gas_price, 'gwei'))
+            logger.info(f'GAS BASE - {res} gwei\n')
+            if res <= MAX_GAS_BASE:
                 break
             else:
                 time.sleep(60)
@@ -30,7 +47,8 @@ def exception_handler(label=''):
         def wrapper(self, *args, **kwargs):
             for _ in range(RETRY):
                 try:
-                    chek_gas_eth()
+                    check_gas_eth()
+                    check_gas_base()
                     return func(self, *args, **kwargs)
 
                 except TransactionNotFound:

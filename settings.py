@@ -12,7 +12,8 @@ CHAIN_RPC = {
     Base    : 'https://rpc.ankr.com/base',
 }
 
-MAX_GAS_ETH = 400        # gas в gwei (смотреть здесь : https://etherscan.io/gastracker)
+MAX_GAS_ETH = 400        # max gas в gwei (смотреть здесь : https://etherscan.io/gastracker)
+MAX_GAS_BASE = 0.01      # max gas в base (смотреть здесь : https://cointool.app/gasPrice/base)
 
 RETRY = 2  # Количество попыток при ошибках / фейлах
 TIME_DELAY = [100, 200]  # Задержка после ТРАНЗАКЦИЙ     [min, max]
