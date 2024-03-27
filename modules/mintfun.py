@@ -15,19 +15,3 @@ class MintFun(Wallet):
     def __init__(self, private_key, chain, number):
         super().__init__(private_key, chain, number)
         self.abi = js.load(open('./abi/mintfun.txt'))
-
-    @exception_handler('Mint on MintFun')
-    def mint(self):
-        conract = random.choice(contracts)
-        contr = self.web3.eth.contract(address=Web3.to_checksum_address(conract["address"]), abi=self.abi)
-        name = contr.functions.name().call()
-        logger.info(f'Mint {name} on MintFun')
-
-        dick = {
-            'from': self.address_wallet,
-            'nonce': self.web3.eth.get_transaction_count(self.address_wallet),
-            **self.get_gas_price()
-        }
-
-        contract_txn = contr.functions.mint().build_transaction(dick)
-        self.send_transaction_and_wait(contract_txn, f'Mint {name} on MintFun')

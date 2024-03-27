@@ -55,40 +55,44 @@ class MintNFT(Wallet):
 
         self.send_transaction_and_wait(tx, f'Mint {quantity} COIN Earnings nft')
 
-    @exception_handler('Mint Frames of the Future')
-    def mint_frames_of_the_future(self):
-        logger.info('Mint Frames of the Future nft')
-        tx = {
-            'chainId': self.web3.eth.chain_id,
-            'data': '0x1249c58bfc000023c0',
-            'to': Web3.to_checksum_address('0xbf47540eb3c1404dbcf61ca47dfa2d4c8e78c533'),
-            'from': self.address_wallet,
-            'nonce': self.web3.eth.get_transaction_count(self.address_wallet),
-            'gas': 100_000,
-            **self.get_gas_price()
-        }
-        gas = self.web3.eth.estimate_gas(tx)
-        tx.update({'gas': gas})
-
-        self.send_transaction_and_wait(tx, f'Mint Frames of the Future nft')
-
-    @exception_handler('Mint Box')
-    def mint_box(self):
-        logger.info('Mint Box')
-        rand = random.randint(0, 1)
-        data = '0xa0712d68000000000000000000000000000000000000000000000000000000000000000' + str(rand)
-
+    @exception_handler('Mint Why-Phi')
+    def mint_philand(self):
+        logger.info('Mint Why-Phi')
+        data = '0x6a627842000000000000000000000000' + self.address_wallet[2:]
         tx = {
             'chainId': self.web3.eth.chain_id,
             'data': data,
-            'to': Web3.to_checksum_address('0x3f433f14e6ace35bd11c6a8c6d8875daa68c6a80'),
             'from': self.address_wallet,
+            'to': Web3.to_checksum_address('0xc649989246faa59bbefa7c65551cc4461e823320'),
             'nonce': self.web3.eth.get_transaction_count(self.address_wallet),
-            'gas': 100_000,
+            'gas': 150_000,
             **self.get_gas_price()
         }
 
         gas = self.web3.eth.estimate_gas(tx)
         tx.update({'gas': gas})
 
-        self.send_transaction_and_wait(tx, f'Mint Box')
+        self.send_transaction_and_wait(tx, 'Mint Why-Phi')
+
+    @exception_handler('Mint BASE PYTHON ZORB')
+    def mint_python_zorb_base_opensea(self):
+        logger.info('Mint BASE PYTHON ZORB')
+
+        dick = {
+            'from': self.address_wallet,
+            'nonce': self.web3.eth.get_transaction_count(self.address_wallet),
+            **self.get_gas_price()
+        }
+
+        contract = self.web3.eth.contract(address=Web3.to_checksum_address('0x00005ea00ac477b1030ce78506496e8c2de24bf5'), abi=js.load(open('./abi/opensea.txt')))
+        txn = contract.functions.mintPublic(
+            Web3.to_checksum_address('0x92dFC144B8B897d36E980e6E29217201801A1C1e'),
+            Web3.to_checksum_address('0x0000a26b00c1F0DF003000390027140000fAa719'),
+            Web3.to_checksum_address('0x0000000000000000000000000000000000000000'),
+            1
+        ).build_transaction(dick)
+
+        self.send_transaction_and_wait(txn, f'Mint BASE PYTHON ZORB on OpenSea')
+
+
+

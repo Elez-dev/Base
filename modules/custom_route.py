@@ -21,17 +21,17 @@ class CustomRouter:
         nft = MintNFT(self.private_key, Base, self.number)
         nft.mint_coin_earnings()
 
-    def mint_frames_of_the_fut(self):
+    def mint_philand(self):
         nft = MintNFT(self.private_key, Base, self.number)
-        nft.mint_frames_of_the_future()
+        nft.mint_philand()
 
-    def mint_eip4844(self):
-        nft = MintFun(self.private_key, Base, self.number)
-        nft.mint()
-
-    def mint_boxs(self):
+    def mint_python_zorb_opensea(self):
         nft = MintNFT(self.private_key, Base, self.number)
-        nft.mint_box()
+        nft.mint_python_zorb_base_opensea()
+
+    def vote_rubyscore(self):
+        vote = RubyScore(self.private_key, Base, self.number)
+        vote.vote()
 
     def run(self):
         address = web3_eth.eth.account.from_key(self.private_key).address

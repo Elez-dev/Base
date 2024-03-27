@@ -63,15 +63,15 @@ class Worker:
 
             if self.action == 3:
                 nft = MintNFT(key, Base, str_number)
-                nft.mint_frames_of_the_future()
+                nft.mint_philand()
 
             if self.action == 4:
-                nft = MintFun(key, Base, str_number)
-                nft.mint()
+                nft = MintNFT(key, Base, str_number)
+                nft.mint_python_zorb_base_opensea()
 
             if self.action == 5:
-                nft = MintNFT(key, Base, str_number)
-                nft.mint_box()
+                vote = RubyScore(key, Base, str_number)
+                vote.vote()
 
             if self.action == 7:
                 router = CustomRouter(key, str_number, {})
@@ -94,9 +94,9 @@ if __name__ == '__main__':
             logger.info('''
 1 - Mint Penny NFT (1 на акк)
 2 - Mint COIN Earnings NFT(максимум 2 на аккаунт)
-3 - Mint Frames of the Future (1 за транзакцию)
-4 - EIP-4844 is Based (1 за транзакцию)
-5 - Mint Box
+3 - Mint Why-Phi
+4 - Mint Python Zorb opensea
+5 - Vote on RubyScore
 
 6 - Generate Сustom routes (сначала запускаем этот модуль, потом модуль 7)
 7 - Rus Сustom routes
