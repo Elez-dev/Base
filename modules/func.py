@@ -83,6 +83,7 @@ def get_accounts_data():
 
         priv_key_evm = []
         for k, v in accounts_data.items():
-            priv_key_evm.append(v['private_key_evm'])
+            if isinstance(v['private_key_evm'], str):
+                priv_key_evm.append(v['private_key_evm'])
 
         return priv_key_evm

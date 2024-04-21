@@ -13,22 +13,27 @@ CHAIN_RPC = {
 }
 
 MAX_GAS_ETH = 400        # max gas в gwei (смотреть здесь : https://etherscan.io/gastracker)
-MAX_GAS_BASE = 5      # max gas в base (смотреть здесь : https://cointool.app/gasPrice/base)
+MAX_GAS_BASE = 0.2      # max gas в base (смотреть здесь : https://cointool.app/gasPrice/base)
+SLIPPAGE = 1
 
 RETRY = 2  # Количество попыток при ошибках / фейлах
 TIME_DELAY = [100, 200]  # Задержка после ТРАНЗАКЦИЙ     [min, max]
-TIME_ACCOUNT_DELAY = [200, 300]  # Задержка между АККАУНТАМИ     [min, max]
+TIME_ACCOUNT_DELAY = [2, 3]  # Задержка между АККАУНТАМИ     [min, max]
 TIME_DELAY_ERROR = [10, 20]  # Задержка при ошибках / фейлах [min, max]
 
 # 2 - Mint COIN Earnings
 
 QUANTITY = [1, 2]  # [min, max] Максимум можно только 2 на один акк
 
-# 3 - Custom routes
+# 6 - Sold Token
+
+odos_token = [
+    '0xb8d98a102b0079b69ffbc760c8d857a31653e56e'
+]
+
+# 8 - Custom routes
 
 ROUTES = [
-    ['mint_penny', None],
-    ['mint_coin_earnings', None],
     ['mint_philand'],
     ['mint_python_zorb_opensea'],
     ['vote_rubyscore']
@@ -40,6 +45,7 @@ ROUTES = [
         'mint_philand'
         'mint_python_zorb_opensea'
         'vote_rubyscore'
+        'sold_token_odos'
 '''
 
 ROUTES_SHUFFLE = True           # Перемешка модулей

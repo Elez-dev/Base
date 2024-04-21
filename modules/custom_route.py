@@ -33,6 +33,14 @@ class CustomRouter:
         vote = RubyScore(self.private_key, Base, self.number)
         vote.vote()
 
+    def sold_token_odos(self):
+        od = OdosSwap(self.private_key, Base, self.number, {})
+        for token in odos_token:
+            res = od.sold_token(token)
+            if res is False:
+                continue
+            sleeping(TIME_DELAY[0], TIME_DELAY[1])
+
     def run(self):
         address = web3_eth.eth.account.from_key(self.private_key).address
         data = json.load(open('./data/router.json'))

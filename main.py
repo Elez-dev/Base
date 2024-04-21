@@ -1,8 +1,7 @@
-import random
 from sys import stdout
 from modules import *
 from modules.custom_route import CustomRouter
-from settings import ROUTES, TIME_ACCOUNT_DELAY, ROUTES_SHUFFLE, CHAIN_RPC
+from settings import ROUTES, TIME_ACCOUNT_DELAY, ROUTES_SHUFFLE, CHAIN_RPC, odos_token, TIME_DELAY
 import time
 import json
 
@@ -73,7 +72,15 @@ class Worker:
                 vote = RubyScore(key, Base, str_number)
                 vote.vote()
 
-            if self.action == 7:
+            if self.action == 6:
+                od = OdosSwap(key, Base, str_number, {})
+                for token in odos_token:
+                    res = od.sold_token(token)
+                    if res is False:
+                        continue
+                    sleeping(TIME_DELAY[0], TIME_DELAY[1])
+
+            if self.action == 8:
                 router = CustomRouter(key, str_number, {})
                 res = router.run()
                 if res is False:
@@ -97,19 +104,20 @@ if __name__ == '__main__':
 3 - Mint Why-Phi
 4 - Mint Python Zorb opensea
 5 - Vote on RubyScore
+6 - Sold token Odos
 
-6 - Generate Сustom routes (сначала запускаем этот модуль, потом модуль 7)
-7 - Rus Сustom routes
+7 - Generate Сustom routes (сначала запускаем этот модуль, потом модуль 7)
+8 - Rus Сustom routes
 ''')
 
             time.sleep(0.1)
             act = int(input('Choose an action: '))
 
-            if act == 6:
+            if act == 7:
                 Worker.generate_route()
                 continue
 
-            if act in range(1, 8):
+            if act in range(1, 9):
                 break
 
         worker = Worker(act)
