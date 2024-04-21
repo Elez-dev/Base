@@ -50,13 +50,15 @@ python3.10 main.py
 
 2 - Mint COIN Earnings NFT(максимум 2 на аккаунт)
 
-3 - Mint Frames of the Future (1 за транзакцию)
+3 - Mint Why-Phi
 
-4 - EIP-4844 is Based (1 за транзакцию)
+4 - Mint Python Zorb OpenSea
 
-5 - Generate custom routes (сначала запускаем этот модуль, потом модуль 6)
+5 - Vote on RubyScore
 
-6 - Rus custom routes
+6 - Generate custom routes (сначала запускаем этот модуль, потом модуль 6)
+
+7 - Rus custom routes
 
 ---
 <h2>❤️ По всем вопросам в наш чат - https://t.me/pythondao</h2>
