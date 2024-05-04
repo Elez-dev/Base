@@ -6,7 +6,6 @@ from modules.wallet import Wallet
 import json as js
 
 contracts = [
-    {"address": "0x273cA93A52b817294830eD7572aA591Ccfa647fd"},
     {"address": "0xDeD6e72bdE74c7840fADE275c3afDb997be47BBf"},
     {"address": "0x398234D24388A47fd2c1c36097dEcb0364c7AFfC"},
     {"address": "0x28aBD603EeeC02B74fc2DBb1040694D40B9D4A0B"},
